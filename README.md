@@ -32,6 +32,5 @@ python3 grid_contender.py
 Map can be uploaded from a file, or use the pre-built map editor to design a map. Click the grid on the map to add or remove obstacles. Use your creativity to make interesting maps and play with your friends.
 
 ## TODO
-- Add map size change function in UI
 - Make it online
 - Add ranking system
