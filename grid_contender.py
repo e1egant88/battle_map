@@ -1,6 +1,7 @@
 import random, os
 import tkinter as tk
 from tkinter import filedialog
+from tkinter import simpledialog
 from PIL import Image, ImageTk
 from map_generator import MapGenerator 
 
@@ -19,9 +20,10 @@ class GridContender:
     - If two players land on the same grid, game over.
     - The last player on a grid owns it.
     """
-    def __init__(self, root, map_width=12, map_height=12, grid_size=50, round_time=5):
+    def __init__(self, root, grid_size=50, round_time=5):
         self.root = root
-        self.map_height, self.map_width, self.grid_size = map_height, map_width, grid_size
+        self.ask_map_size()
+        self.grid_size = grid_size
         self.round_time, self.countdown = round_time, round_time
         self.grid_map = [[0 for _ in range(self.map_width)] for _ in range(self.map_height)]
         self.game_over = False
@@ -37,6 +39,21 @@ class GridContender:
 
         self.create_ui()
         self.root.bind("<KeyPress>", self.handle_keypress)
+
+    def ask_map_size(self):
+        """Opens a dialog to ask for map height and width before starting the game"""
+        self.root.withdraw()  # Hide the main window initially
+
+        map_width = simpledialog.askinteger("Map Width", "Enter the map width (e.g., 12):", minvalue=5, maxvalue=20)
+        map_height = simpledialog.askinteger("Map Height", "Enter the map height (e.g., 12):", minvalue=5, maxvalue=20)
+
+        if map_width != map_height:
+            raise ValueError("Map height and width should be the same")
+
+        if map_width and map_height:
+            root.deiconify()  # Show the main window
+            self.map_width = map_width
+            self.map_height = map_height
 
     def create_ui(self):
         """Creates the GUI elements"""
@@ -302,6 +319,8 @@ class GridContender:
             self.winner = self.player1
         elif flag < 0:
             self.winner = self.player2
+
+
 
 if __name__ == "__main__":
     root = tk.Tk()
