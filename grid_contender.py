@@ -81,7 +81,7 @@ class GridContender:
 
         # Load image
         cwd = os.getcwd()
-        image_path = cwd + "/g/background.jpg"  # Change this to your image path
+        image_path = cwd + "/background.jpg"  # Change this to your image path
         original_image = Image.open(image_path)
         resized_image = original_image.resize((self.canvas_width, self.canvas_height))  # Resize to fit canvas
         self.bg_image = ImageTk.PhotoImage(resized_image)
