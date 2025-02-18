@@ -117,6 +117,7 @@ class GridContender:
         map_window = tk.Toplevel(self.root)  # Create a new window
         map_window.title("Map Generator")
         self.generate_map_window = map_window
+        
         # Create an instance of MapGenerator inside the new window
         self.map_generator = MapGenerator(map_window, self.grid_map, self.map_width, self.map_height)
         
@@ -128,7 +129,6 @@ class GridContender:
         """Loads the generated map from the MapGenerator instance into GridContender."""
         self.grid_map = self.map_generator.grid_map  # Copy the generated map
         self.draw_map()  # Redraw the map in the main game
-        # messagebox.showinfo("Success", "Generated map loaded into the game!")
         self.new_game_button.config(text="Start with the new map")
         self.generate_map_window.destroy()
      
@@ -235,7 +235,6 @@ class GridContender:
         self.import_map_button.config(state=tk.NORMAL)
         self.open_map_generator_button.config(state=tk.NORMAL)
 
-
     def draw_rectangle(self, x, y, fill_color, outline_color):
         self.canvas.create_rectangle(
             x * self.grid_size, y * self.grid_size,
@@ -247,16 +246,6 @@ class GridContender:
         """Draws the grid and blocked positions."""
         for y in range(self.map_height):
             for x in range(self.map_width):
-                # Check if the current position is blocked
-                # if self.grid_map[x][y] == -1:
-                #     self.draw_rectangle(x, y, "gray", "black")
-                # elif self.grid_map[x][y] == 1:
-                #     self.draw_rectangle(x, y, "#F07167", "black")
-                # elif self.grid_map[x][y] == 2:
-                #     self.draw_rectangle(x, y, "#0081A7", "black")
-                # else:
-                #     self.draw_rectangle(x, y, "white", "black")
-
                 match self.grid_map[x][y]:
                     case -1:
                         self.draw_rectangle(x, y, "gray", "black")
@@ -319,8 +308,6 @@ class GridContender:
             self.winner = self.player1
         elif flag < 0:
             self.winner = self.player2
-
-
 
 if __name__ == "__main__":
     root = tk.Tk()
